@@ -219,6 +219,8 @@ hold.addEventListener("click", () => {
             hold.disabled = false;
             rightScore += counterMySide;
             counterMySide = 0;
+            mySide.style.opacity = "1";
+            hisSide.style.opacity = "0.7";
             // numRight.innerText = `${rightScore.toString()}`;
             // littleNumRight.textContent = "0";
             // firstSide = true;
@@ -238,6 +240,7 @@ hold.addEventListener("click", () => {
             numRight.innerText = `${(rightScore + counterMySide).toString()}`;
             counterMySide = 0;
             littleNumLeft.textContent = `${counterMySide}`;
+
             //איפוס הפרמטרים כדי להתחיל משחק חדש מאופ
             howManyWins1++;
             win1.innerText = `wins: ${howManyWins1}`;
@@ -439,5 +442,3 @@ roll.addEventListener("click", () => {
     }
   }
 });
-
-// קוד של גיטאב ראשון לפני הוספת יריב מחשב וצליל
