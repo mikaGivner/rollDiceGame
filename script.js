@@ -194,8 +194,7 @@ hold.addEventListener("click", () => {
       //להגריל מספר תורות
       //לעשות כמספר התורות את ההטלת קוביה, שינוי התמונות וחישוב המספר הקטן והצגתו
       //בסוף הפעולה- עדכון המספר הגדול ואיפוס המחשב תור. שני הלחצנים לחיצים
-
-      let countCurrent = 5; //לשנות להגרלת מספר במקום 5 דיפולט
+      let countCurrent = Math.floor(Math.random() * 4) + 1;
 
       const intervalRepet = setInterval(function () {
         //הגרלת הקוביותת שינוי התמונה וחישוב
