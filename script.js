@@ -68,8 +68,9 @@ win2.style.visibility = "hidden";
 // מה שלמעלה הוספתי בשישי
 st2.style.display = "none";
 st1.style.display = "none";
-mySide.style.background = "linear-gradient(180deg,#a72470 30%, #b47299 70%)";
-hisSide.style.background = "linear-gradient(180deg,#b47299 30%, #a72470 70%)";
+mySide.style.background = " #9f8772";
+hisSide.style.background = " #9f8772";
+hisSide.style.opacity = "0.7";
 
 //הגדרות תוכן דיפולטיביות למשתנים
 win1.innerText = "wins: 0";
@@ -125,10 +126,14 @@ nG.addEventListener("click", () => {
   breakPoint.value = "";
   target.innerText = "";
   topModal.style.display = "none";
-  mySide.style.background = "linear-gradient(180deg,#a72470 30%, #b47299 70%)";
-  hisSide.style.background = "linear-gradient(180deg,#b47299 30%, #a72470 70%)";
+  mySide.style.opacity = "1";
+  hisSide.style.opacity = "0.7";
   p1.style.color = "rgb(66, 64, 64)";
   p2.style.color = "rgb(66, 64, 64)";
+  mySide.style.background = " #9f8772";
+  hisSide.style.background = " #9f8772";
+  mySide.style.opacity = "1";
+  hisSide.style.opacity = "0.7";
   hold.disabled = false;
   roll.disabled = false;
   st1.innerText = "";
@@ -158,21 +163,15 @@ hold.addEventListener("click", () => {
       numLeft.innerText = `${leftScore.toString()}`;
       littleNumLeft.textContent = "0";
       firstSide = false;
-      hisSide.style.background =
-        "linear-gradient(180deg,#a72470  30%, #b47299 70%)";
-
-      mySide.style.background =
-        "linear-gradient(180deg, #b47299  30%, #a72470 70%)";
+      mySide.style.opacity = "0.7";
+      hisSide.style.opacity = "1";
     } else if (!firstSide) {
       rightScore += counterMySide;
       numRight.innerText = `${rightScore.toString()}`;
       littleNumRight.textContent = "0";
       firstSide = true;
-      mySide.style.background =
-        "linear-gradient(180deg,#a72470  30%, #b47299 70%)";
-
-      hisSide.style.background =
-        "linear-gradient(180deg, #b47299  30%, #a72470 70%)";
+      mySide.style.opacity = "1";
+      hisSide.style.opacity = "0.7";
     }
 
     counterMySide = 0;
@@ -187,10 +186,8 @@ hold.addEventListener("click", () => {
       counterMySide = 0;
       roll.disabled = true;
       hold.disabled = true;
-      hisSide.style.background =
-        "linear-gradient(180deg,#a72470  30%, #b47299 70%)";
-      mySide.style.background =
-        "linear-gradient(180deg, #b47299  30%, #a72470 70%)";
+      hisSide.style.background = mySide.style.opacity = "0.7";
+      hisSide.style.opacity = "1";
       //להגריל מספר תורות
       //לעשות כמספר התורות את ההטלת קוביה, שינוי התמונות וחישוב המספר הקטן והצגתו
       //בסוף הפעולה- עדכון המספר הגדול ואיפוס המחשב תור. שני הלחצנים לחיצים
@@ -234,6 +231,8 @@ hold.addEventListener("click", () => {
             st2.style.display = "block";
             st2.innerText = "YOU WIN!";
             st1.innerText = "YOU LOSE!";
+            mySide.style.opacity = "1";
+            hisSide.style.opacity = "0.7";
             roll.disabled = true;
             hold.disabled = true;
             numRight.innerText = `${(rightScore + counterMySide).toString()}`;
@@ -250,6 +249,8 @@ hold.addEventListener("click", () => {
             st2.style.display = "block";
             st1.innerText = "YOU WIN!";
             st2.innerText = "YOU LOSE!";
+            mySide.style.opacity = "0.7";
+            hisSide.style.opacity = "1";
             roll.disabled = true;
             hold.disabled = true;
             numRight.innerText = `${(rightScore + counterMySide).toString()}`;
@@ -341,6 +342,8 @@ roll.addEventListener("click", () => {
         st2.style.display = "block";
         st2.innerText = "YOU WIN!";
         st1.innerText = "YOU LOSE!";
+        mySide.style.opacity = "1";
+        hisSide.style.opacity = "0.7";
         roll.disabled = true;
         hold.disabled = true;
         numRight.innerText = `${(rightScore + counterMySide).toString()}`;
@@ -358,6 +361,8 @@ roll.addEventListener("click", () => {
         st2.style.display = "block";
         st1.innerText = "YOU WIN!";
         st2.innerText = "YOU LOSE!";
+        mySide.style.opacity = "0.7";
+        hisSide.style.opacity = "1";
         roll.disabled = true;
         hold.disabled = true;
         numRight.innerText = `${(rightScore + counterMySide).toString()}`;
@@ -399,6 +404,8 @@ roll.addEventListener("click", () => {
         st2.style.display = "block";
         st1.innerText = "YOU WIN!";
         st2.innerText = "YOU LOSE!";
+        mySide.style.opacity = "0.7";
+        hisSide.style.opacity = "1";
         roll.disabled = true;
         hold.disabled = true;
         numLeft.innerText = `${(leftScore + counterMySide).toString()}`;
@@ -417,6 +424,8 @@ roll.addEventListener("click", () => {
         st2.style.display = "block";
         st2.innerText = "YOU WIN!";
         st1.innerText = "YOU LOSE!";
+        mySide.style.opacity = "1";
+        hisSide.style.opacity = "0.7";
         roll.disabled = true;
         hold.disabled = true;
         numLeft.innerText = `${(leftScore + counterMySide).toString()}`;
