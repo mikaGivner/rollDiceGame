@@ -118,7 +118,7 @@ button.addEventListener("click", () => {
 });
 
 nG.addEventListener("click", () => {
-  //קוד ישן של ניו גיים
+  computerLost = 0;
   modal.style.display = "block";
   win1.style.visibility = "hidden";
   win2.style.visibility = "hidden";
@@ -178,6 +178,91 @@ hold.addEventListener("click", () => {
     counterMySide = 0;
 
     console.log(counterMySide);
+  }
+  if (opn[1].checked) {
+    if (firstSide) {
+      leftScore += counterMySide;
+      numLeft.innerText = `${leftScore.toString()}`;
+      littleNumLeft.textContent = "0";
+      counterMySide = 0;
+      roll.disabled = true;
+      hold.disabled = true;
+      hisSide.style.background =
+        "linear-gradient(180deg,#a72470  30%, #b47299 70%)";
+      mySide.style.background =
+        "linear-gradient(180deg, #b47299  30%, #a72470 70%)";
+      //להגריל מספר תורות
+      //לעשות כמספר התורות את ההטלת קוביה, שינוי התמונות וחישוב המספר הקטן והצגתו
+      //בסוף הפעולה- עדכון המספר הגדול ואיפוס המחשב תור. שני הלחצנים לחיצים
+
+      let countCurrent = 5; //לשנות להגרלת מספר במקום 5 דיפולט
+
+      const intervalRepet = setInterval(function () {
+        //הגרלת הקוביותת שינוי התמונה וחישוב
+        let randomUp = Math.floor(Math.random() * 6);
+        let randomDown = Math.floor(Math.random() * 6);
+        imgUp.innerHTML = `${arr[randomUp]}`;
+        imgDown.innerHTML = `${arr[randomDown]}`;
+        counterMySide += randomUp + randomDown + 2;
+
+        littleNumRight.textContent = `${counterMySide}`;
+        //בדיקת פעולות ניצחון במחשב
+        if (rightScore + counterMySide > Number(breakPoint.value)) {
+          computerLost = 1;
+        }
+        if (rightScore + counterMySide === Number(breakPoint.value)) {
+          computerLost = 2;
+        }
+        //סיום בדיקת פעולות ניצחון במחשב
+
+        countCurrent--;
+        if (countCurrent === 0) {
+          if (computerLost === 0) {
+            clearInterval(intervalRepet);
+            roll.disabled = false;
+            hold.disabled = false;
+            rightScore += counterMySide;
+            counterMySide = 0;
+            // numRight.innerText = `${rightScore.toString()}`;
+            // littleNumRight.textContent = "0";
+            // firstSide = true;
+          } else if (computerLost === 1) {
+            //במצב שהמחשב מפסיד
+            clearInterval(intervalRepet);
+            mySide.style.background = "#2f2e30";
+            p1.style.color = "rgb(160, 28, 52)";
+            st1.style.display = "block";
+            st2.style.display = "block";
+            st2.innerText = "YOU WIN!";
+            st1.innerText = "YOU LOSE!";
+            roll.disabled = true;
+            hold.disabled = true;
+            numRight.innerText = `${(rightScore + counterMySide).toString()}`;
+            counterMySide = 0;
+            littleNumLeft.textContent = `${counterMySide}`;
+            //איפוס הפרמטרים כדי להתחיל משחק חדש מאופ
+            howManyWins1++;
+            win1.innerText = `wins: ${howManyWins1}`;
+            winning.play();
+          } else if (computerLost === 2) {
+            hisSide.style.background = "#2f2e30";
+            p2.style.color = "rgb(160, 28, 52)";
+            st1.style.display = "block";
+            st2.style.display = "block";
+            st1.innerText = "YOU WIN!";
+            st2.innerText = "YOU LOSE!";
+            roll.disabled = true;
+            hold.disabled = true;
+            numRight.innerText = `${(rightScore + counterMySide).toString()}`;
+            counterMySide = 0;
+            littleNumRight.textContent = `${counterMySide}`;
+            howManyWins2++;
+            win2.innerText = `wins: ${howManyWins2.toString()}`;
+            winning.play();
+          }
+        }
+      }, 2000);
+    }
   }
 });
 
@@ -286,6 +371,64 @@ roll.addEventListener("click", () => {
     }
   } else if (opn[1].checked) {
     // במשחק מול המחשב
+    if (firstSide) {
+      numRight.innerText = `${rightScore.toString()}`;
+      littleNumRight.textContent = "0";
+      let randomUp = Math.floor(Math.random() * 6);
+      let randomDown = Math.floor(Math.random() * 6);
+      imgUp.innerHTML = `${arr[randomUp]}`;
+      imgDown.innerHTML = `${arr[randomDown]}`;
+
+      counterMySide += randomUp + randomDown + 2;
+
+      if (randomUp === 0 && randomDown === 0) {
+        dubbleDice.play();
+        counterMySide = 0;
+      }
+      if (randomUp === 5 && randomDown === 5) {
+        //מה קורה במשחק מול מחשב שיש 66 וזה עובר למחשב
+        dubbleDice.play();
+        counterMySide = 0;
+        roll.disabled = true;
+      }
+      littleNumLeft.textContent = `${counterMySide}`;
+
+      if (leftScore + counterMySide > Number(breakPoint.value)) {
+        hisSide.style.background = "#2f2e30";
+        p2.style.color = "rgb(160, 28, 52)";
+        st1.style.display = "block";
+        st2.style.display = "block";
+        st1.innerText = "YOU WIN!";
+        st2.innerText = "YOU LOSE!";
+        roll.disabled = true;
+        hold.disabled = true;
+        numLeft.innerText = `${(leftScore + counterMySide).toString()}`;
+        counterMySide = 0;
+        littleNumLeft.textContent = `${counterMySide}`;
+
+        //איפוס הפרמטרים כדי להתחיל משחק חדש מאופס
+        howManyWins2++;
+        win2.innerText = `wins: ${howManyWins2.toString()}`;
+        winning.play();
+      }
+      if (leftScore + counterMySide === Number(breakPoint.value)) {
+        mySide.style.background = "#2f2e30";
+        p1.style.color = "rgb(160, 28, 52)";
+        st1.style.display = "block";
+        st2.style.display = "block";
+        st2.innerText = "YOU WIN!";
+        st1.innerText = "YOU LOSE!";
+        roll.disabled = true;
+        hold.disabled = true;
+        numLeft.innerText = `${(leftScore + counterMySide).toString()}`;
+        counterMySide = 0;
+        littleNumRight.textContent = `${counterMySide}`;
+        //איפוס הפרמטרים כדי להתחיל משחק חדש מאופ
+        howManyWins1++;
+        win1.innerText = `wins: ${howManyWins1}`;
+        winning.play();
+      }
+    }
   }
 });
 
